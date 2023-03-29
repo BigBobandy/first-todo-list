@@ -40,4 +40,16 @@ body h1 {
   font-family: inherit;
   padding: 2px;
   font-weight: bold;
+  border-radius: 8px;
+  background-color: #ffc629;
+  cursor: pointer;
+}
+
+.button:active {
+  transform: scale(0.98);
+}
+
+.button:hover {
+  outline: 0;
+  background-color: #b0b3b2;
 }
