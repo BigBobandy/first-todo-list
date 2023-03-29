@@ -53,3 +53,10 @@ body h1 {
   outline: 0;
   background-color: #b0b3b2;
 }
+
+input {
+  padding-top: 5px;
+  font-family: inherit;
+  border-radius: 7px;
+  border: 2px solid var(--primary-color);
+}

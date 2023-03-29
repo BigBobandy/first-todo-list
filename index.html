@@ -8,19 +8,26 @@
     <script src="script.js" defer></script>
     <link rel="stylesheet" href="style.css" />
   </head>
-  <body class="body">
+  <body>
     <div class="container">
       <h1>To Do List</h1>
       <ul id="list-of-todos"></ul>
       <form>
-        <input type="text" id="input" required />
-        <button type="submit" id="submit" class="button">Add to list</button>
+        <input
+          type="text"
+          id="user-input"
+          required
+          placeholder="Add todo to list..."
+        />
+        <button type="submit-button" id="submit" class="button">
+          Add to list
+        </button>
         <button type="reset" id="clear-button" class="button">
           Clear Completed Todos
         </button>
       </form>
       <p>
-        Number of todos to do: <b><span id="todo-number">0</span></b>
+        Number of todos left to do: <b><span id="todo-number">0</span></b>
       </p>
     </div>
   </body>
