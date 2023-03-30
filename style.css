@@ -60,3 +60,9 @@ input {
   border-radius: 7px;
   border: 2px solid var(--primary-color);
 }
+
+.list-item {
+  list-style: none;
+  font-family: inherit;
+  font-size: larger;
+}
