@@ -24,9 +24,14 @@ function addTodo() {
   checkbox.classList.add("checkbox");
   checkbox.type = "checkbox";
 
+  const checkMark = document.createElement("span");
+  checkMark.classList.add("checkmark");
+  checkMark.innerHTML = "✓";
+
   //Creating a label element to wrap the newTodo and the checkbox with
   const label = document.createElement("label");
-  label.append(checkbox, inputElement.value.trim());
+  label.classList.add("checkbox");
+  label.append(checkbox, checkMark, inputElement.value.trim());
 
   //Appending the checkbox to the new todo element and then appending the new todo element to the unordered list element
   newTodo.append(label);
