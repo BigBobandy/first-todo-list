@@ -86,10 +86,12 @@ function loadStoredTodos() {
   //Retreiving the stored todo items from local storage and parsing it back into an array
   const storedTodos = JSON.parse(localStorage.getItem("storedTodos"));
 
-  //Checks if there are any storedTodo items and if there are it uses the for loop to iterate through the array and calls the createElements function for each item
+  // Checks if there are any storedTodo items
   if (storedTodos) {
-    for (const todoText of storedTodos) {
-      createElements(todoText);
+    // Iterates through the storedTodos array using a for...of loop
+    for (const todoItem of storedTodos) {
+      // Calls the createElements() function with the text and checked properties
+      createElements(todoItem.text, todoItem.checked);
     }
   }
 }
