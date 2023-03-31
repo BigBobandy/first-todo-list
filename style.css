@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Secular+One&display=swap");
 
 :root {
   --primary-color: #231f20;
@@ -12,7 +12,7 @@
 
 body {
   background-color: var(--primary-color);
-  font-family: "Roboto", sans-serif;
+  font-family: "Secular One", sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -64,5 +64,44 @@ input {
 .list-item {
   list-style: none;
   font-family: inherit;
-  font-size: larger;
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
+.checkbox {
+  font-size: 16px;
+  cursor: pointer;
+  user-select: none;
+  display: inline-flex;
+  align-items: center;
+}
+
+.checkbox input[type="checkbox"] {
+  display: none;
+}
+
+.checkbox .checkmark {
+  display: inline-block;
+  vertical-align: middle;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+  background-color: var(--secondary-color);
+  border: 2px solid var(--primary-color);
+  border-radius: 4px;
+  color: transparent;
+  margin-right: 10px;
+}
+
+.checkbox:hover .checkmark {
+  background-color: var(--secondary-color);
+  border-color: var(--primary-color);
+}
+
+.checkbox input[type="checkbox"]:checked ~ .checkmark {
+  background-color: var(--border-color);
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+  font-weight: bold;
 }
