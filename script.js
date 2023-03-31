@@ -12,14 +12,25 @@ loadStoredTodos();
 function main(event) {
   //Prevents the page from reloading when a new todo is submitted
   event.preventDefault();
+
+  //Prevents an empty input field from being submitted
+  if (inputElement.value === "") {
+    return;
+  }
+
   //Getting the value of the new todo and assigning it to todoText variable
   const todoText = inputElement.value.trim();
+
+  //Calls functions
   createElements(todoText);
   updateCounter();
   storeTodos();
+
+  //Resets the input field to blank after submit
+  inputElement.value = "";
 }
 //this functions creates all of the elements for every new todo and appends them
-function createElements(todoText) {
+function createElements(todoText, isChecked = false) {
   //Creating the list item of the new todo
   const newTodo = document.createElement("li");
   newTodo.classList.add("list-item");
@@ -29,6 +40,7 @@ function createElements(todoText) {
   //Giving the checkbox the class of checkbox and also setting its type
   checkbox.classList.add("checkbox");
   checkbox.type = "checkbox";
+  checkbox.checked = isChecked;
 
   //Creating a span that has a unicode character of a checkmark for styling purposes
   const checkMark = document.createElement("span");
