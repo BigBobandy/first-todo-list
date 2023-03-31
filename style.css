@@ -11,97 +11,113 @@
 }
 
 body {
-  background-color: var(--primary-color);
-  font-family: "Secular One", sans-serif;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  overflow: hidden;
-  margin: 0;
+  background-color: var(
+    --primary-color
+  ); /* Set the background color of the body */
+  font-family: "Secular One", sans-serif; /* Set the font family for the body */
+  display: flex; /* Set display to flex to use flexbox layout */
+  flex-direction: column; /* Set the flex direction to column */
+  align-items: center; /* Center the flex items horizontally */
+  justify-content: center; /* Center the flex items vertically */
+  height: 100vh; /* Set the height to 100% of the viewport height */
+  overflow: hidden; /* Hide any content that overflows the body */
+  margin: 0; /* Remove default margin from the body */
 }
 
 body h1 {
-  text-align: center;
-  text-decoration: underline;
+  text-align: center; /* Center the text inside h1 elements */
+  text-decoration: underline; /* Add underline to h1 elements */
 }
 
 .container {
-  border-radius: 25px;
-  border: 3px solid;
-  border-color: var(--border-color);
-  background-color: var(--secondary-color);
-  font-family: inherit;
-  padding: 5rem;
+  border-radius: 25px; /* Set the border-radius of the container */
+  border: 3px solid; /* Set the border width and style of the container */
+  border-color: var(--border-color); /* Set the border color of the container */
+  background-color: var(
+    --secondary-color
+  ); /* Set the background color of the container */
+  font-family: inherit; /* Inherit the font-family from the parent element */
+  padding: 5rem; /* Add padding to the container */
 }
 
 .button {
-  font-family: inherit;
-  padding: 2px;
-  font-weight: bold;
-  border-radius: 8px;
-  background-color: #ffc629;
-  cursor: pointer;
+  font-family: inherit; /* Inherit the font-family from the parent element */
+  padding: 2px; /* Add padding to the button */
+  font-weight: bold; /* Make the button text bold */
+  border-radius: 8px; /* Set the border-radius of the button */
+  background-color: #ffc629; /* Set the background color of the button */
+  cursor: pointer; /* Change the cursor to pointer when hovering over the button */
 }
 
 .button:active {
-  transform: scale(0.98);
+  transform: scale(0.98); /* Scale down the button when it's active (pressed) */
 }
 
 .button:hover {
-  outline: 0;
-  background-color: #b0b3b2;
+  outline: 0; /* Remove the outline when hovering over the button */
+  background-color: #b0b3b2; /* Change the background color of the button when hovering */
 }
 
 input {
-  padding-top: 5px;
-  font-family: inherit;
-  border-radius: 7px;
-  border: 2px solid var(--primary-color);
+  padding-top: 5px; /* Add padding to the top of input elements */
+  font-family: inherit; /* Inherit the font-family from the parent element */
+  border-radius: 7px; /* Set the border-radius of the input element */
+  border: 2px solid var(--primary-color); /* Set the border width, style, and color of the input element */
 }
 
 .list-item {
-  list-style: none;
-  font-family: inherit;
-  color: var(--primary-color);
-  font-weight: bold;
+  list-style: none; /* Remove the default list-style (bullet points) */
+  font-family: inherit; /* Inherit the font-family from the parent element */
+  color: var(--primary-color); /* Set the color of the list item text */
+  font-weight: bold; /* Make the list item text bold */
 }
 
 .checkbox {
-  font-size: 16px;
-  cursor: pointer;
-  user-select: none;
-  display: inline-flex;
-  align-items: center;
+  font-size: 16px; /* Set the font-size of the checkbox label */
+  cursor: pointer; /* Change the cursor to pointer when hovering over the checkbox */
+  user-select: none; /* Disable user text selection */
+  display: inline-flex; /* Set display to inline-flex for alignment */
+  align-items: center; /* Vertically align the checkbox and the label */
 }
 
 .checkbox input[type="checkbox"] {
-  display: none;
+  display: none; /* Hide the default checkbox */
 }
 
 .checkbox .checkmark {
-  display: inline-block;
-  vertical-align: middle;
-  width: 20px;
-  height: 20px;
-  line-height: 20px;
-  text-align: center;
-  background-color: var(--secondary-color);
-  border: 2px solid var(--primary-color);
-  border-radius: 4px;
-  color: transparent;
-  margin-right: 10px;
+  display: inline-block; /* Set display to inline-block for the custom checkbox */
+  vertical-align: middle; /* Vertically align the custom checkbox with the label */
+  width: 20px; /* Set the width of the custom checkbox */
+  height: 20px; /* Set the height of the custom checkbox */
+  line-height: 20px; /* Set the line-height equal to the height to vertically center the content */
+  text-align: center; /* Horizontally center the content of the custom checkbox */
+  background-color: var(
+    --secondary-color
+  ); /* Set the background color of the custom checkbox */
+  border: 2px solid var(--primary-color); /* Set the border width, style, and color of the custom checkbox */
+  border-radius: 4px; /* Set the border-radius of the custom checkbox */
+  color: transparent; /* Make the custom checkbox content transparent */
+  margin-right: 10px; /* Add spacing to the right of the custom checkbox */
 }
 
 .checkbox:hover .checkmark {
-  background-color: var(--secondary-color);
-  border-color: var(--primary-color);
+  background-color: var(
+    --secondary-color
+  ); /* Change the background color of the custom checkbox when hovering */
+  border-color: var(
+    --primary-color
+  ); /* Change the border color of the custom checkbox when hovering */
 }
 
 .checkbox input[type="checkbox"]:checked ~ .checkmark {
-  background-color: var(--border-color);
-  border-color: var(--primary-color);
-  color: var(--primary-color);
-  font-weight: bold;
+  background-color: var(
+    --border-color
+  ); /* Change the background color of the custom checkbox when checked */
+  border-color: var(
+    --primary-color
+  ); /* Change the border color of the custom checkbox when checked */
+  color: var(
+    --primary-color
+  ); /* Change the content color of the custom checkbox when checked */
+  font-weight: bold; /* Make the content of the custom checkbox bold when checked */
 }
