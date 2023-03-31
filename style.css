@@ -10,6 +10,8 @@
   box-sizing: border-box;
 }
 
+/*Below I've added comments to each setting to help me remember what they do for future reference*/
+
 body {
   background-color: var(
     --primary-color

@@ -4,11 +4,17 @@ const addButton = document.getElementById("add-button");
 const clearButton = document.getElementById("clear-button");
 const todoCounter = document.getElementById("todo-number");
 
+loadFromLocalStorage();
+
 addButton.addEventListener("click", addTodo);
 
-function addTodo() {
-  //Prevents the page from reloading when a new todo is added
-  event.preventDefault();
+//Function to add todos to the list. This function also takes in a parameter of todoText with an empty string allowing it to be called inside the loadFromLocalStorage function
+function addTodo(todoText = "") {
+  const event = window.event || null;
+
+  if (event) {
+    event.preventDefault();
+  }
 
   //Prevents an empty input field from being submitted and returns early if so
   if (inputElement.value.trim() === "") {
@@ -36,7 +42,27 @@ function addTodo() {
   //Appending the checkbox to the new todo element and then appending the new todo element to the unordered list element
   newTodo.append(label);
   todoListElement.append(newTodo);
+  saveToLocalStorage();
 
   //Setting the input field to blank after a new todo has been added
   inputElement.value = "";
+}
+
+function saveToLocalStorage() {
+  const storedTodos = [];
+  for (let i = 0; i < todoListElement.children.length; i++) {
+    storedTodos.push(todoListElement.children[i].textContent);
+  }
+  localStorage.setItem("storedTodos", JSON.stringify(storedTodos));
+}
+
+function loadFromLocalStorage() {
+  const storedTodos = JSON.parse(localStorage.getItem("storedTodos"));
+
+  if (storedTodos) {
+    // Call `addTodo` with the stored todo text for each stored todo
+    for (const todoText of storedTodos) {
+      addTodo(todoText);
+    }
+  }
 }
