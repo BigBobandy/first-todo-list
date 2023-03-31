@@ -4,65 +4,80 @@ const addButton = document.getElementById("add-button");
 const clearButton = document.getElementById("clear-button");
 const todoCounter = document.getElementById("todo-number");
 
-loadFromLocalStorage();
+addButton.addEventListener("click", main);
 
-addButton.addEventListener("click", addTodo);
+//This function checks if there are any todos stored in local storage and loads them in if so
+loadStoredTodos();
 
-//Function to add todos to the list. This function also takes in a parameter of todoText with an empty string allowing it to be called inside the loadFromLocalStorage function
-function addTodo(todoText = "") {
-  const event = window.event || null;
-
-  if (event) {
-    event.preventDefault();
-  }
-
-  //Prevents an empty input field from being submitted and returns early if so
-  if (inputElement.value.trim() === "") {
-    return;
-  }
-
-  //creating the list item of the new todo
+function main(event) {
+  //Prevents the page from reloading when a new todo is submitted
+  event.preventDefault();
+  //Getting the value of the new todo and assigning it to todoText variable
+  const todoText = inputElement.value.trim();
+  createElements(todoText);
+  updateCounter();
+  storeTodos();
+}
+//this functions creates all of the elements for every new todo and appends them
+function createElements(todoText) {
+  //Creating the list item of the new todo
   const newTodo = document.createElement("li");
   newTodo.classList.add("list-item");
 
-  //Creating a checkbox for each new todo and appending it to the new list item
+  //Creating a checkbox for each new todo list item
   const checkbox = document.createElement("input");
+  //Giving the checkbox the class of checkbox and also setting its type
   checkbox.classList.add("checkbox");
   checkbox.type = "checkbox";
 
+  //Creating a span that has a unicode character of a checkmark for styling purposes
   const checkMark = document.createElement("span");
   checkMark.classList.add("checkmark");
   checkMark.innerHTML = "✓";
 
-  //Creating a label element to wrap the newTodo and the checkbox with
+  //Creating a label to wrap the text of the newTodo and the checkbox with
   const label = document.createElement("label");
   label.classList.add("checkbox");
-  label.append(checkbox, checkMark, inputElement.value.trim());
 
-  //Appending the checkbox to the new todo element and then appending the new todo element to the unordered list element
+  //Appending everything
+  label.append(checkbox, checkMark, todoText);
   newTodo.append(label);
   todoListElement.append(newTodo);
-  saveToLocalStorage();
-
-  //Setting the input field to blank after a new todo has been added
-  inputElement.value = "";
 }
 
-function saveToLocalStorage() {
+//This functions counts how many todos there are and displays it in the todoCounter element
+function updateCounter() {
+  let counter = parseInt(todoListElement.children.length);
+  todoCounter.innerText = counter;
+  console.log(counter);
+}
+
+function storeTodos() {
+  //Creating an empty array to store the todos in
   const storedTodos = [];
+  //For loop that iterates over the list element adding each todo to the storedTodos array
   for (let i = 0; i < todoListElement.children.length; i++) {
-    storedTodos.push(todoListElement.children[i].textContent);
+    //Storing the list item at index i
+    const todoItem = todoListElement.children[i];
+    //Getting the text from the todo item and storing it in the todoText variable
+    const todoText = todoItem.querySelector("label").lastChild.textContent;
+    //Checking whether the isChecked boolean is true or false and storing it in the isChecked variable. If its checked it will equal true and false if it isn't
+    const isChecked = todoItem.querySelector('input[type="checkbox"]').checked;
+    //Storing the text which is equal to the todoText variable and checked which is a boolean equal to the isChecked variable in the storedTodos array
+    storedTodos.push({ text: todoText, checked: isChecked });
   }
+  //Storing the storedTodos array in local storage
   localStorage.setItem("storedTodos", JSON.stringify(storedTodos));
 }
 
-function loadFromLocalStorage() {
+function loadStoredTodos() {
+  //Retreiving the stored todo items from local storage and parsing it back into an array
   const storedTodos = JSON.parse(localStorage.getItem("storedTodos"));
 
+  //Checks if there are any storedTodo items and if there are it uses the for loop to iterate through the array and calls the createElements function for each item
   if (storedTodos) {
-    // Call `addTodo` with the stored todo text for each stored todo
     for (const todoText of storedTodos) {
-      addTodo(todoText);
+      createElements(todoText);
     }
   }
 }
