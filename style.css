@@ -4,6 +4,7 @@
   --primary-color: #231f20;
   --secondary-color: #b0b3b2;
   --border-color: #ffc629;
+  --hover-color: #fab700;
 }
 
 * {
@@ -57,7 +58,9 @@ body h1 {
 
 .button:hover {
   outline: 0; /* Remove the outline when hovering over the button */
-  background-color: #b0b3b2; /* Change the background color of the button when hovering */
+  background-color: var(
+    --hover-color
+  ); /* Change the background color of the button when hovering */
 }
 
 input {
@@ -104,11 +107,8 @@ input {
 
 .checkbox:hover .checkmark {
   background-color: var(
-    --secondary-color
+    --hover-color
   ); /* Change the background color of the custom checkbox when hovering */
-  border-color: var(
-    --primary-color
-  ); /* Change the border color of the custom checkbox when hovering */
 }
 
 .checkbox input[type="checkbox"]:checked ~ .checkmark {
@@ -122,4 +122,14 @@ input {
     --primary-color
   ); /* Change the content color of the custom checkbox when checked */
   font-weight: bold; /* Make the content of the custom checkbox bold when checked */
+}
+
+#error-message {
+  display: none;
+  justify-content: center; /* Horizontally center the content */
+  font-size: 1.1rem; /* Set font size */
+  font-weight: 600; /* Set font weight */
+  color: var(--primary-color); /* Set text color */
+  padding: 10px; /* Add padding */
+  width: 100%; /* Set width */
 }

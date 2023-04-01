@@ -15,8 +15,9 @@ function main(event) {
   //Prevents the page from reloading when a new todo is submitted
   event.preventDefault();
 
-  //Prevents an empty input field from being submitted
+  //Prevents an empty input field from being submitted and calls a funtion that displays an error
   if (inputElement.value === "") {
+    showErrorMessage("Please Enter a todo");
     return;
   }
 
@@ -30,6 +31,9 @@ function main(event) {
 
   //Resets the input field to blank after submit
   inputElement.value = "";
+
+  //Calls function that hides the error message once a valid todo is submitted
+  hideErrorMessage();
 }
 //this functions creates all of the elements for every new todo and appends them
 function createElements(todoText, isChecked = false) {
@@ -146,4 +150,17 @@ function clearChecked() {
   updateCounter();
   //Updating the stored todos
   storeTodos();
+}
+
+//Error message function that takes a message as an argument
+function showErrorMessage(message) {
+  const errorMessageElement = document.getElementById("error-message");
+  errorMessageElement.innerText = message;
+  errorMessageElement.style.display = "flex";
+}
+
+//Hides the error message
+function hideErrorMessage() {
+  const errorMessageElement = document.getElementById("error-message");
+  errorMessageElement.style.display = "none";
 }
