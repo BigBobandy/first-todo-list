@@ -4,6 +4,7 @@ const addButton = document.getElementById("add-button");
 const clearButton = document.getElementById("clear-button");
 const todoCounter = document.getElementById("todo-number");
 
+//Attaching event listeners
 addButton.addEventListener("click", main);
 clearButton.addEventListener("click", clearChecked);
 
@@ -68,9 +69,10 @@ function createElements(todoText, isChecked = false) {
 
 //This functions counts how many todos there are and displays it in the todoCounter element
 function updateCounter() {
+  //Counting how many list elements there are and storing it in the counter variable
   let counter = parseInt(todoListElement.children.length);
+  //Updating the todoCounter element with how many list elements there are
   todoCounter.innerText = counter;
-  console.log(counter);
 }
 
 //Function that stores todo list elements in an array and then stores the array in local storage
@@ -79,18 +81,24 @@ function storeTodos() {
   const storedTodos = [];
   //For loop that iterates over the list element adding each todo to the storedTodos array
   for (let i = 0; i < todoListElement.children.length; i++) {
-    //Storing the list item at index i
+    // Storing the list item at index i
     const todoItem = todoListElement.children[i];
-    //Getting the text from the todo item and storing it in the todoText variable
-    const labelText = todoItem.querySelector("label").textContent;
-    const todoText = labelText.replace("✓", "").trim();
-    //Checking whether the isChecked boolean is true or false and storing it in the isChecked variable. If its checked it will equal true and false if it isn't
-    const isChecked = todoItem.querySelector('input[type="checkbox"]').checked;
-    //Storing the text which is equal to the todoText variable and checked which is a boolean equal to the isChecked variable in the storedTodos array
-    storedTodos.push({ text: todoText, checked: isChecked });
+    // Getting the label from the todo item
+    const label = todoItem.querySelector("label");
+    //Checks if the label element exists
+    if (label) {
+      // Getting the text from the label and storing it in the todoText variable
+      const todoText = label.lastChild.textContent;
+      // Checking whether the isChecked boolean is true or false and storing it in the isChecked variable. If its checked it will equal true and false if it isn't
+      const isChecked = todoItem.querySelector(
+        'input[type="checkbox"]'
+      ).checked;
+      // Storing the text which is equal to the todoText variable and checked which is a boolean equal to the isChecked variable in the storedTodos array
+      storedTodos.push({ text: todoText, checked: isChecked });
+    }
+    //Storing the storedTodos array in local storage
+    localStorage.setItem("storedTodos", JSON.stringify(storedTodos));
   }
-  //Storing the storedTodos array in local storage
-  localStorage.setItem("storedTodos", JSON.stringify(storedTodos));
 }
 
 //Function that loads the stored list elements from local storage
@@ -107,28 +115,35 @@ function loadStoredTodos() {
     }
   }
 }
-
+//Function that is called when a checkbox is checked or unchecked
 function checkboxHandler(event) {
+  //Accessing the checkbox that was clicked and storing it in the checkbox variable
   const checkbox = event.target;
 
+  //If statement checking if the checkbox was already checked or not when it was clicked and adding or removing the checked class depending on which is true
   if (checkbox.checked) {
     checkbox.classList.add("checked");
   } else {
     checkbox.classList.remove("checked");
   }
 
-  console.log(checkbox.classList.value);
+  //Calling the storeTodos function to update it with the changes made
   storeTodos();
 }
 
+//Function that is called when the clearButton is pressed
 function clearChecked() {
+  //Selecting all elements with the checked class and storing it
   const checkedItems = document.querySelectorAll(".checkbox.checked");
 
+  //forEach loop that removes every element that was checked
   checkedItems.forEach((checkbox) => {
-    const listItem = checkbox.parentNode;
+    const listItem = checkbox.closest("li");
     listItem.remove();
   });
 
+  //Updating the counter
   updateCounter();
+  //Updating the stored todos
   storeTodos();
 }
