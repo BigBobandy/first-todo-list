@@ -118,6 +118,8 @@ function loadStoredTodos() {
       createElements(todoItem.text, todoItem.checked);
     }
   }
+
+  updateCounter();
 }
 //Function that is called when a checkbox is checked or unchecked
 function checkboxHandler(event) {
