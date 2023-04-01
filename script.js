@@ -5,6 +5,7 @@ const clearButton = document.getElementById("clear-button");
 const todoCounter = document.getElementById("todo-number");
 
 addButton.addEventListener("click", main);
+clearButton.addEventListener("click", clearChecked);
 
 //This function checks if there are any todos stored in local storage and loads them in if so
 loadStoredTodos();
@@ -42,6 +43,14 @@ function createElements(todoText, isChecked = false) {
   checkbox.type = "checkbox";
   checkbox.checked = isChecked;
 
+  //Add the checked class to the checkbox if the isChecked is true. This is used for when the createElements function is called inside the loadStoredTodos function
+  if (isChecked) {
+    checkbox.classList.add("checked");
+  }
+
+  //Event listner for the checkbox that stores whether the box is checked or not every time it is changed
+  checkbox.addEventListener("change", checkboxHandler);
+
   //Creating a span that has a unicode character of a checkmark for styling purposes
   const checkMark = document.createElement("span");
   checkMark.classList.add("checkmark");
@@ -64,6 +73,7 @@ function updateCounter() {
   console.log(counter);
 }
 
+//Function that stores todo list elements in an array and then stores the array in local storage
 function storeTodos() {
   //Creating an empty array to store the todos in
   const storedTodos = [];
@@ -72,7 +82,8 @@ function storeTodos() {
     //Storing the list item at index i
     const todoItem = todoListElement.children[i];
     //Getting the text from the todo item and storing it in the todoText variable
-    const todoText = todoItem.querySelector("label").lastChild.textContent;
+    const labelText = todoItem.querySelector("label").textContent;
+    const todoText = labelText.replace("✓", "").trim();
     //Checking whether the isChecked boolean is true or false and storing it in the isChecked variable. If its checked it will equal true and false if it isn't
     const isChecked = todoItem.querySelector('input[type="checkbox"]').checked;
     //Storing the text which is equal to the todoText variable and checked which is a boolean equal to the isChecked variable in the storedTodos array
@@ -82,6 +93,7 @@ function storeTodos() {
   localStorage.setItem("storedTodos", JSON.stringify(storedTodos));
 }
 
+//Function that loads the stored list elements from local storage
 function loadStoredTodos() {
   //Retreiving the stored todo items from local storage and parsing it back into an array
   const storedTodos = JSON.parse(localStorage.getItem("storedTodos"));
@@ -94,4 +106,29 @@ function loadStoredTodos() {
       createElements(todoItem.text, todoItem.checked);
     }
   }
+}
+
+function checkboxHandler(event) {
+  const checkbox = event.target;
+
+  if (checkbox.checked) {
+    checkbox.classList.add("checked");
+  } else {
+    checkbox.classList.remove("checked");
+  }
+
+  console.log(checkbox.classList.value);
+  storeTodos();
+}
+
+function clearChecked() {
+  const checkedItems = document.querySelectorAll(".checkbox.checked");
+
+  checkedItems.forEach((checkbox) => {
+    const listItem = checkbox.parentNode;
+    listItem.remove();
+  });
+
+  updateCounter();
+  storeTodos();
 }
